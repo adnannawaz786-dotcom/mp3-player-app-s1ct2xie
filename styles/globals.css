@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom MP3 Player Styles */
+@layer components {
+  .visualizer-bar {
+    @apply bg-gradient-to-t from-primary/60 to-primary transition-all duration-75 ease-out;
+    animation: pulse 0.5s ease-in-out infinite alternate;
+  }
+
+  .visualizer-bar:nth-child(odd) {
+    animation-delay: 0.1s;
+  }
+
+  .visualizer-bar:nth-child(even) {
+    animation-delay: 0.2s;
+  }
+
+  .player-gradient {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--primary) / 0.8) 50%, 
+      hsl(var(--secondary)) 100%);
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glass-effect-dark {
+    @apply backdrop-blur-md bg-black/10 border border-white/10;
+  }
+
+  .track-item {
+    @apply transition-all duration-300 hover:bg-accent/50 hover:scale-[1.02] cursor-pointer;
+  }
+
+  .track-item.active {
+    @apply bg-primary/10 border-l-4 border-primary;
+  }
+
+  .mini-player {
+    @apply fixed bottom-20 left-4 right-4 z-40 glass-effect rounded-xl p-3 shadow-lg;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .mini-player.hidden {
+    @apply translate-y-full opacity-0 pointer-events-none;
+  }
+
+  .progress-bar {
+    @apply w-full h-2 bg-secondary rounded-full overflow-hidden cursor-pointer;
+  }
+
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-300 ease-out;
+  }
+
+  .control-button {
+    @apply w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-105;
+  }
+
+  .control-button-small {
+    @apply w-8 h-8 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all duration-200 flex items-center justify-center;
+  }
+
+  .volume-slider {
+    @apply w-full h-1 bg-secondary rounded-full appearance-none cursor-pointer;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 bg-primary rounded-full cursor-pointer shadow-md;
+  }
+
+  .volume-slider::-moz-range-thumb {
+    @apply w-4 h-4 bg-primary rounded-full cursor-pointer shadow-md border-0;
+  }
+
+  .track-time {
+    @apply text-xs text-muted-foreground font-mono;
+  }
+
+  .fullscreen-overlay {
+    @apply fixed inset-0 z-50 bg-gradient-to-br from-primary/20 via-background to-secondary/20 backdrop-blur-sm;
+  }
+
+  .fullscreen-player {
+    @apply w-full h-full flex flex-col items-center justify-center p-8 text-center;
+  }
+
+  .album-art {
+    @apply w-64 h-64 rounded-2xl shadow-2xl object-cover mb-8;
+    animation: rotate 20s linear infinite;
+  }
+
+  .album-art.paused {
+    animation-play-state: paused;
+  }
+
+  .waveform {
+    @apply flex items-end justify-center gap-1 h-16 px-4;
+  }
+
+  .waveform-bar {
+    @apply w-1 bg-primary/60 rounded-full transition-all duration-100;
+  }
+
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 z-30 bg-background/95 backdrop-blur-md border-t border-border;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center justify-center py-2 px-4 text-xs transition-colors duration-200;
+  }
+
+  .nav-item.active {
+    @apply text-primary;
+  }
+
+  .nav-item:not(.active) {
+    @apply text-muted-foreground hover:text-foreground;
+  }
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleY(0.3);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/60 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/80;
+}
+
+/* Focus styles for accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .album-art {
+    @apply w-48 h-48 mb-6;
+  }
+  
+  .fullscreen-player {
+    @apply p-4;
+  }
+  
+  .mini-player {
+    @apply bottom-16 left-2 right-2;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-effect {
+    @apply bg-background border-2 border-foreground;
+  }
+  
+  .visualizer-bar {
+    @apply bg-foreground;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .album-art {
+    animation: none;
+  }
+  
+  .visualizer-bar {
+    animation: none;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
